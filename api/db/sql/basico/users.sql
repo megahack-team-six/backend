@@ -1,0 +1,2 @@
+INSERT INTO `users` (`id`, `nome`, `email`, `password`, `perfil`, `status`, `alterar_senha`)
+    VALUES (1, 'judBrass', 'ti@judbrass.com.br', '$2y$10$TVD/eyHouq.PSt12JofGXuhdDooJEv6HPwBn7F5S80nqCTtfmwGi6', '["1"]', 1, '0');
