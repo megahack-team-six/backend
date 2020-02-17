@@ -1,7 +1,7 @@
 <?php
 include_once '../config/header_post.php';
-$rules = array('usuario.desativar');
-include_once '../config/validate.php';
+// $rules = array('usuario.desativar');
+// include_once '../config/validate.php';
 include_once '../config/database.php';
 include_once '../objects/users.php';
 

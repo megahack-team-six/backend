@@ -1,7 +1,7 @@
 <?php
 include_once '../config/header_post.php';
-$rules = array('usuario.editar');
-include_once '../config/validate.php';
+// $rules = array('usuario.editar');
+// include_once '../config/validate.php';
 include_once '../config/database.php';
 include_once '../objects/users.php';
 
@@ -10,11 +10,7 @@ $db = $database->getConnection();
 $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
-if ( 
-    isset($data->id) && !empty($data->id) &&    
-    isset($data->nome) && !empty($data->nome) &&    
-    isset($data->email) && !empty($data->email)
-) {
+if (isset($data->id) && !empty($data->id)) {
     
     $user->email = $data->email;
     $email_exists = $user->emailExists();
@@ -25,8 +21,7 @@ if (
     }
     $user->id = $data->id;
     $user->nome = $data->nome;
-    $perfil = json_encode($data->perfil);
-    $user->perfil = is_array($data->perfil) ? $perfil : json_encode(array($perfil));
+    $user->password = $data->password;
     if ($user->update()) {
         http_response_code(200);
         echo json_encode(array("message" => "Usuário foi alterado.", "id" => $data->id));

@@ -19,7 +19,7 @@ class User {
 
     function create() {
 
-        $query = "INSERT INTO users SET nome=:nome,email=:email,password=:password,status=1";
+        $query = "INSERT INTO users SET nome=:nome,email=:email,perfil=:perfil,password=:password,status=1";
 
         $stmt = $this->conn->prepare($query);
         $this->nome=htmlspecialchars(strip_tags($this->nome));
@@ -28,7 +28,7 @@ class User {
 
         $stmt->bindParam(':nome', $this->nome);
         $stmt->bindParam(':email', $this->email);
-
+        $stmt->bindParam(':perfil', $this->perfil);
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
         $stmt->bindParam(':password', $password_hash);
 
@@ -38,17 +38,19 @@ class User {
 
     function update() {
 
-        $query = "UPDATE users SET nome=:nome,email=:email,perfil=:perfil WHERE id=:id";
+        $query = "UPDATE users SET nome=:nome,email=:email,password=:password WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
         $this->id=htmlspecialchars(strip_tags($this->id));
         $this->nome=htmlspecialchars(strip_tags($this->nome));
         $this->email=htmlspecialchars(strip_tags($this->email));
+        $this->password=htmlspecialchars(strip_tags($this->password));
 
         $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
         $stmt->bindParam(':nome', $this->nome);
         $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':perfil', $this->perfil);
+        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $stmt->bindParam(':password', $password_hash);
         if ($stmt->execute()) return true;
         return false;
     }

@@ -1,6 +1,5 @@
 <?php
 include_once '../config/header_post.php';
-include_once '../config/validate.php';
 include_once '../config/database.php';
 include_once '../objects/users.php';
 
@@ -17,6 +16,8 @@ if (
     $user->nome = $data->nome;
     $user->email = $data->email;
     $user->password = $data->password;
+    $perfil = json_encode($data->perfil);
+    $user->perfil = is_array($data->perfil) ? $perfil : json_encode(array($perfil));
 
     if ($id = $user->create()) {
         http_response_code(200);
