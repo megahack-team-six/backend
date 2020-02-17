@@ -1,6 +1,6 @@
 <?php
 include_once '../config/header_post.php';
-// $rules = array('usuario.editar');
+$rules = array('usuario.editar');
 include_once '../config/validate.php';
 include_once '../config/database.php';
 include_once '../objects/users.php';
